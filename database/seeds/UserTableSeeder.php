@@ -18,8 +18,8 @@ class UserTableSeeder extends Seeder
             $user = User::create([
                 'email' => 'admin@mail.com',
                 'password' => Hash::make('secret'),
+                'role' => Role::getRoleByName(User::ROLE_ADMIN)->id,
             ]);
-            $user->roles()->attach(Role::getRoleByName(User::ROLE_ADMIN));
         }
     }
 }
