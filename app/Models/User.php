@@ -1,14 +1,20 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
-use Illuminate\Contracts\Auth\MustVerifyEmail;
+use App\Traits\RolesTrait;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
 class User extends Authenticatable
 {
+
     use Notifiable;
+
+    use RolesTrait;
+
+    const ROLE_ADMIN = 'Administrator';
+    const ROLE_USER = 'User';
 
     /**
      * The attributes that are mass assignable.
@@ -16,7 +22,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'email', 'password',
     ];
 
     /**
@@ -36,4 +42,14 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+
+    /**
+     * check is User has admin Role
+     * @return bool
+     */
+    public function isAdmin(): bool
+    {
+        return null !== $this->roles()->whereName(self::ROLE_ADMIN)->first();
+    }
 }
