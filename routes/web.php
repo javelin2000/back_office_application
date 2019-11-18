@@ -18,10 +18,17 @@
 Auth::routes(['register'=>false]);
 
 Route::middleware('auth')->group(function (){
-    Route::get('/', 'ClientController@index');
-    Route::get('/dashboard', 'ClientController@index')->name('home');
-    Route::get('/create-user', 'UserController@index')->name('user.create');
-    Route::get('client/{client}', 'ClientController@show')->name('client.show');
-    Route::put('client/{client}', 'ClientController@update')->name('client.update');
+    Route::get('', 'ClientController@index');
+    Route::get('dashboard', 'ClientController@index')->name('home');
+    Route::prefix('create-user')->group(function () {
+        Route::get('', 'UserController@create')->name('user.create');
+        Route::post('', 'UserController@store')->name('user.store');
+        Route::put('', 'UserController@update')->name('user.store');
+    });
+    Route::prefix('client/{client}')->group(function () {
+        Route::get('', 'ClientController@show')->name('client.show');
+        Route::put('', 'ClientController@update')->name('client.update');
+
+    });
 });
 

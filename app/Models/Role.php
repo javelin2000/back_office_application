@@ -29,8 +29,18 @@ class Role extends Model
      * @param $name
      * @return mixed
      */
-    public static function getRoleByName($name)
+    public static function getRoleByName(string $name): Role
     {
         return self::whereName($name)->first();
+    }
+
+    /**
+     * Get Role by ID
+     * @param int $id
+     * @return mixed
+     */
+    public static function getRoleByID(int $id): Role
+    {
+        return self::find($id);
     }
 }
