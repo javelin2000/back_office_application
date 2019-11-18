@@ -11,6 +11,13 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+//Route::get('/', function () {
+//    redirect('/login');
+//});
+Route::get('/', 'HomeController@index');
+
+Auth::routes();
+
+Route::get('/dashboard', 'ClientController@index')->middleware('auth')->name('home');
+Route::get('/create-user', 'HomeController@index')->name('create-user');
+Route::get('/client/id', 'HomeController@index')->name('create-user');
