@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ClientRequest;
 use App\Models\Client;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -31,7 +32,7 @@ class ClientController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param Request $request
      * @return Response
      */
     public function store(Request $request)
@@ -42,12 +43,12 @@ class ClientController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param Client $client
      * @return Response
      */
-    public function show($id)
+    public function show(Client $client)
     {
-        //
+        return view('client', ['client' => $client]);
     }
 
     /**
@@ -64,13 +65,16 @@ class ClientController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return Response
+     * @param ClientRequest $request
+     * @param Client $client
+     * @return void
      */
-    public function update(Request $request, $id)
+    public function update(ClientRequest $request, Client $client)
     {
-        //
+        $clientData = $request->all();
+        $client->update($clientData);
+        return view('client', ['client' => $client, 'updateResult'=>true]);
+
     }
 
     /**

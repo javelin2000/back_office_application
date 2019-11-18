@@ -36,6 +36,6 @@ let table_tr = document.querySelectorAll('.table-tr');
 Array.from(table_tr).forEach(link => {
     link.addEventListener('click', (event)=> {
         // link.attributes
-        console.log(link.getAttribute('id'));
+        window.location.assign("client/" + link.getAttribute('id'));
     });
 });

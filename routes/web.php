@@ -14,10 +14,14 @@
 //Route::get('/', function () {
 //    redirect('/login');
 //});
-Route::get('/', 'HomeController@index');
 
-Auth::routes();
+Auth::routes(['register'=>false]);
 
-Route::get('/dashboard', 'ClientController@index')->middleware('auth')->name('home');
-Route::get('/create-user', 'HomeController@index')->name('create-user');
-Route::get('/client/id', 'HomeController@index')->name('create-user');
+Route::middleware('auth')->group(function (){
+    Route::get('/', 'ClientController@index');
+    Route::get('/dashboard', 'ClientController@index')->name('home');
+    Route::get('/create-user', 'UserController@index')->name('user.create');
+    Route::get('client/{client}', 'ClientController@show')->name('client.show');
+    Route::put('client/{client}', 'ClientController@update')->name('client.update');
+});
+

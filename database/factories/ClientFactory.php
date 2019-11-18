@@ -26,6 +26,9 @@ $factory->define(Client::class, function (Faker $faker) {
         'phone_number' => $faker->tollFreePhoneNumber,
         'address' => $faker->address,
         'country' => $faker->country,
-        'trading_account_number' => $faker->name,
+        'trading_account_number' => $faker->bankAccountNumber,
+        'balance' => $faker->randomNumber(5),
+        'open_trades' => $faker->randomNumber(2),
+        'close_trades' => $faker->randomNumber(1),
     ];
 });

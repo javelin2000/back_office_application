@@ -54,7 +54,7 @@
                             </li>
                         @if (Auth::user()->isAdmin())
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('create-user') }}">{{ __('Create new User') }}</a>
+                                <a class="nav-link" href="{{ route('user.create') }}">{{ __('Create new User') }}</a>
                             </li>
                         @endif
                             <li class="nav-item dropdown">
