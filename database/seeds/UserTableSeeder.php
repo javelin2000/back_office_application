@@ -15,11 +15,14 @@ class UserTableSeeder extends Seeder
     public function run()
     {
         if (User::count() === 0){
-            $user = User::create([
+            $user = new User([
                 'email' => 'admin@mail.com',
                 'password' => Hash::make('secret'),
-                'role' => Role::getRoleByName(User::ROLE_ADMIN)->id,
             ]);
+            $user->unsetEventDispatcher();
+            $user->save();
+
+            $user->roles()->attach(Role::getRoleByName(User::ROLE_ADMIN));
         }
     }
 }

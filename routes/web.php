@@ -20,7 +20,7 @@ Auth::routes(['register'=>false]);
 Route::middleware('auth')->group(function (){
     Route::get('', 'ClientController@index');
     Route::get('dashboard', 'ClientController@index')->name('home');
-    Route::prefix('create-user')->group(function () {
+    Route::prefix('create-user')->middleware('admin')->group(function () {
         Route::get('', 'UserController@create')->name('user.create');
         Route::post('', 'UserController@store')->name('user.store');
         Route::put('', 'UserController@update')->name('user.store');

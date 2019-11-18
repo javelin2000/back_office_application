@@ -95,5 +95,4 @@
             </div>
         </div>
     </div>
-    @if (isset($user)) {{$user}} @endif
 @endsection
